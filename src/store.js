@@ -42,11 +42,15 @@ class Store {
    * Добавление новой записи
    */
   addItem() {
+    let maxCode = 0;
+    this.state.list.forEach((item) => {
+      if (item.code > maxCode) maxCode = item.code;
+    });
     this.setState({
       ...this.state,
-      list: [...this.state.list, {code: this.state.list.length + 1, title: 'Новая запись'}]
-    })
-  };
+      list: [...this.state.list, {code: ++maxCode, title: 'Новая запись'}]
+    });
+  }
 
   /**
    * Удаление записи по коду
