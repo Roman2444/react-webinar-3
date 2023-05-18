@@ -1,11 +1,28 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import { plural } from '../../utils';
 import './style.css';
 
-function Controls({onAdd}){
+function Controls({onAdd, cart}) {
+  const sum = cart.reduce((sum, item) => sum + item.price * item.count, 0);
+  const cartValue = cart.length ? (
+    <b>
+      {`${cart.length} ${plural(cart.length, {
+        one: 'товар',
+        few: 'товара',
+        many: 'товаров',
+      })} / ${sum} `}
+      &#8381;
+    </b>
+  ) : (
+    <b>пусто</b>
+  );
   return (
     <div className='Controls'>
-      <button onClick={() => onAdd()}>Добавить</button>
+      <div className="Controls-cart">В корзине:&nbsp;&nbsp;{cartValue}</div>
+      <div className="Controls-actions">
+        <button onClick={() => onAdd()}> Перейти </button>
+      </div>
     </div>
   )
 }

@@ -83,6 +83,55 @@ class Store {
       })
     })
   }
+
+
+
+  /**
+   * Добавление товара в корзину
+   * @param code
+   */
+  addProductToCart(code) {
+    // Проверяем, есть ли товар уже в корзине
+    const cartItemIndex = this.state.cart.findIndex(
+      (item) => item.code === code
+    );
+    if (cartItemIndex !== -1) {
+      // Если есть - увеличиваем кол-во на единицу
+      const updatedCart = [...this.state.cart];
+      updatedCart[cartItemIndex].count += 1;
+      this.setState({
+        ...this.state,
+        cart: updatedCart,
+      });
+    } else {
+      // Если нет - добавляем новый элемент в корзину
+      const productToAdd = this.state.list.find((item) => item.code === code);
+      if (!productToAdd) {
+        console.error(`Товар с идентификатором ${code} не найден!`);
+        return;
+      }
+      const newCartItem = {
+        ...productToAdd,
+        count: 1,
+      };
+      this.setState({
+        ...this.state,
+        cart: [...this.state.cart, newCartItem],
+      });
+    }
+  }
+
+  /**
+   * Удаление товара из корзины
+   * @param code 
+   */
+  removeProductFromCart(code) {
+    const updatedCart = this.state.cart.filter((item) => item.code !== code);
+    this.setState({
+      ...this.state,
+      cart: updatedCart,
+    });
+  }
 }
 
 export default Store;
