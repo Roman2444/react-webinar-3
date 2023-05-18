@@ -4,7 +4,6 @@ import './style.css';
 
 function Item(props){
   const callbacks = {
-
     onAddProductToCart: () => {
       props.onAddProductToCart(props.item.code);
     }
