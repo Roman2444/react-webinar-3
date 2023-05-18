@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { plural } from '../../utils';
 import './style.css';
 
-function Controls({onAdd, cart}) {
+function Controls({onOpenModal, cart}) {
   const sum = cart.reduce((sum, item) => sum + item.price * item.count, 0);
   const cartValue = cart.length ? (
     <b>
@@ -21,18 +21,18 @@ function Controls({onAdd, cart}) {
     <div className='Controls'>
       <div className="Controls-cart">В корзине:&nbsp;&nbsp;{cartValue}</div>
       <div className="Controls-actions">
-        <button onClick={() => onAdd()}> Перейти </button>
+        <button onClick={onOpenModal}> Перейти </button>
       </div>
     </div>
   )
 }
 
 Controls.propTypes = {
-  onAdd: PropTypes.func
+  onOpenModal: PropTypes.func
 };
 
 Controls.defaultProps = {
-  onAdd: () => {}
+  onOpenModal: () => {}
 }
 
 export default React.memo(Controls);
