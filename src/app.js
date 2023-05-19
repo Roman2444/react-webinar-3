@@ -38,7 +38,7 @@ function App({store}) {
       <PageLayout>
         <Head title="Магазин" />
         <Controls cart={cart} onOpenModal={() => setModalVisible(true)} />
-        <List list={list} onAddProductToCart={callbacks.onAddProductToCart} />
+        <List list={list} buttonName='Добавить' onHandleClick={callbacks.onAddProductToCart} />
       </PageLayout>
       <Modal visible={modalVisible} setVisible={() => setModalVisible(false)}>
         <ShoppingCart
