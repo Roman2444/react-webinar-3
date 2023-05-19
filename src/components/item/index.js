@@ -9,7 +9,6 @@ function Item(props){
     }
   };
 
-  console.log("props22", props);
   return (
     <div className={"Item"} onClick={callbacks.onClick}>
       <div className="Item-code">{props.item.code}</div>
