@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./style.css";
 
 const Modal = ({ children, visible, setVisible }) => {
@@ -15,4 +16,8 @@ const Modal = ({ children, visible, setVisible }) => {
   );
 };
 
-export default Modal;
+Modal.propTypes = {
+  children: PropTypes.node
+}
+
+export default React.memo(Modal);

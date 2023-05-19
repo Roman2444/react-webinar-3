@@ -26,16 +26,17 @@ const ShoppingCart = ({ setVisible, cart, onDeleteProductFromCart }) => {
         ) : (
           <h3>товары в корзине отсутствуют</h3>
         )}
-      
-      <div className={cn("footer")}>
-        <div className={cn("footer-title")}> Итого </div>
-        <div className={cn("footer-value")}>
-          {cart.reduce((sum, item) => sum + item.price * item.count, 0)} &#8381;
+
+        <div className={cn("footer")}>
+          <div className={cn("footer-title")}> Итого </div>
+          <div className={cn("footer-value")}>
+            {cart.reduce((sum, item) => sum + item.price * item.count, 0)}{" "}
+            &#8381;
+          </div>
         </div>
-      </div>
       </div>
     </div>
   );
 };
 
-export default ShoppingCart;
+export default React.memo(ShoppingCart);
