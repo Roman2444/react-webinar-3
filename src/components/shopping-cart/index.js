@@ -16,7 +16,7 @@ const ShoppingCart = ({ setVisible, cart, onDeleteProductFromCart }) => {
           <button onClick={setVisible}>Закрыть</button>
         </div>
       </div>
-      <div>
+      <div className={cn("body")}>
         {cart.length ? (
           <List
             list={cart}
@@ -26,11 +26,13 @@ const ShoppingCart = ({ setVisible, cart, onDeleteProductFromCart }) => {
         ) : (
           <h3>товары в корзине отсутствуют</h3>
         )}
+      
+      <div className={cn("footer")}>
+        <div className={cn("footer-title")}> Итого </div>
+        <div className={cn("footer-value")}>
+          {cart.reduce((sum, item) => sum + item.price * item.count, 0)} &#8381;
+        </div>
       </div>
-      <div>
-        итого:
-        {cart.reduce((sum, item) => sum + item.price * item.count, 0)}
-        &#8381;
       </div>
     </div>
   );
