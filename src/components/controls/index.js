@@ -38,7 +38,7 @@ Controls.propTypes = {
 };
 
 Controls.defaultProps = {
-  onOpenModal: () => {},
+  onOpenModal: () => {}
 };
 
 export default React.memo(Controls);

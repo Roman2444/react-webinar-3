@@ -6,8 +6,6 @@ import List from "../list";
 const ShoppingCart = ({ setVisible, cart, onDeleteProductFromCart }) => {
   const cn = bem("ShoppingCart");
 
-  console.log(cart);
-
   return (
     <div className={cn()}>
       <div className={cn("head")}>
