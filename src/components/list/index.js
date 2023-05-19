@@ -8,7 +8,7 @@ function List({list, onHandleClick, buttonName}){
     <div className='List'>{
       list.map(item =>
         <div key={item.code} className='List-item'>
-          <Item item={item} onHandleClick={onHandleClick} buttonName={buttonName}/>
+          <Item item={item} count={item.count} onHandleClick={onHandleClick} buttonName={buttonName}/>
         </div>
       )}
     </div>

@@ -9,6 +9,8 @@ function Item(props){
     }
   };
 
+  console.log('props', props);
+
   return (
     <div className={'Item'}
          onClick={callbacks.onClick}>
@@ -19,6 +21,7 @@ function Item(props){
       <div className='Item-price'>
         {props.item.price} &#8381;
       </div>
+      {props.item.count && <div className='Item-count'>{props.item.count} шт</div>} 
       <div className='Item-actions'>
         <button onClick={callbacks.onHandleClick}>
           {props.buttonName}
