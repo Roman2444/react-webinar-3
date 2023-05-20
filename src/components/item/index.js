@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import PropTypes from "prop-types";
+import Button from "../button";
 import './style.css';
 
 function Item(props){
@@ -18,7 +19,7 @@ function Item(props){
         <div className="Item-count">{props.item.count} шт</div>
       )}
       <div className="Item-actions">
-        <button onClick={callbacks.onHandleClick}>{props.buttonName}</button>
+        <Button onClick={callbacks.onHandleClick}>{props.buttonName}</Button>
       </div>
     </div>
   );

@@ -9,10 +9,9 @@
 }
 
 .Modal-content {
-    padding: 5px;
     background: rgb(255, 255, 255);
-    border-radius: 16px;
-    min-width: 50%;
+    min-width: 960px;
+    border-radius: 100px;
     min-height: 50%;
 }
 

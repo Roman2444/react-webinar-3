@@ -3,6 +3,7 @@ import { cn as bem } from "@bem-react/classname";
 import "./style.css";
 import List from "../list";
 import Item from "../item";
+import Button from "../button";
 
 const ShoppingCart = ({ setVisible, cart, onDeleteProductFromCart }) => {
   const cn = bem("ShoppingCart");
@@ -12,7 +13,7 @@ const ShoppingCart = ({ setVisible, cart, onDeleteProductFromCart }) => {
       <div className={cn("head")}>
         <h2 className={cn("title")}>Корзина</h2>
         <div className={cn("actions")}>
-          <button onClick={setVisible}>Закрыть</button>
+          <Button onClick={setVisible}>Закрыть</Button>
         </div>
       </div>
       <div className={cn("body")}>
@@ -34,7 +35,7 @@ const ShoppingCart = ({ setVisible, cart, onDeleteProductFromCart }) => {
         <div className={cn("footer")}>
           <div className={cn("footer-title")}> Итого </div>
           <div className={cn("footer-value")}>
-            {cart.reduce((sum, item) => sum + item.price * item.count, 0)}{" "}
+            {cart.reduce((sum, item) => sum + item.price * item.count, 0).toLocaleString('ru-RU')}{" "}
             &#8381;
           </div>
         </div>

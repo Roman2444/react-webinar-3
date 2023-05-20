@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { plural } from "../../utils";
 import "./style.css";
+import Button from "../button"
 
 function Controls({ onOpenModal, cart }) {
   const sum = cart.reduce((sum, item) => sum + item.price * item.count, 0);
@@ -11,7 +12,7 @@ function Controls({ onOpenModal, cart }) {
         one: "товар",
         few: "товара",
         many: "товаров",
-      })} / ${sum} `}
+      })} / ${sum.toLocaleString('ru-RU')} `}
       &#8381;
     </b>
   ) : (
@@ -21,7 +22,7 @@ function Controls({ onOpenModal, cart }) {
     <div className="Controls">
       <div className="Controls-cart">В корзине:&nbsp;&nbsp;{cartValue}</div>
       <div className="Controls-actions">
-        <button onClick={onOpenModal}> Перейти </button>
+        <Button onClick={onOpenModal}> Перейти </Button>
       </div>
     </div>
   );
