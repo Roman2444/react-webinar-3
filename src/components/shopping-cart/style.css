@@ -2,6 +2,8 @@
     background: #FFFFFF;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
+    overflow: hidden;
+
 }
 
 .ShoppingCart-head {
@@ -37,7 +39,7 @@
 .ShoppingCart-footer {
     display: flex;
     justify-content: space-between;
-    background: #f5f5f5;
+    background: #FFFFFF;
     justify-content: flex-end;
 }
 
