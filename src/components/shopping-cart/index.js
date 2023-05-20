@@ -2,6 +2,7 @@ import React from "react";
 import { cn as bem } from "@bem-react/classname";
 import "./style.css";
 import List from "../list";
+import Item from "../item";
 
 const ShoppingCart = ({ setVisible, cart, onDeleteProductFromCart }) => {
   const cn = bem("ShoppingCart");
@@ -17,9 +18,14 @@ const ShoppingCart = ({ setVisible, cart, onDeleteProductFromCart }) => {
       <div className={cn("body")}>
         {cart.length ? (
           <List
-            list={cart}
-            buttonName="Удалить"
-            onHandleClick={onDeleteProductFromCart}
+            items={cart}
+            renderItem={(item) => (
+              <Item
+                item={item}
+                buttonName="Удалить"
+                onHandleClick={onDeleteProductFromCart}
+              />
+            )}
           />
         ) : (
           <h3>товары в корзине отсутствуют</h3>

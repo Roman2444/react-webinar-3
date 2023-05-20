@@ -3,47 +3,20 @@ import PropTypes from 'prop-types';
 import Item from "../item";
 import './style.css';
 
-function List({list, onHandleClick, buttonName}){
+function List(props){
   return (
     <div className='List'>
-      {list.map(item => (
-        <div key={item.code} className="List-item">
-          <Item
-            item={item}
-            count={item.count}
-            onHandleClick={onHandleClick}
-            buttonName={buttonName}
-          />
-        </div>
-      ))}
+      {props.items.map(props.renderItem)}
     </div>
   )
 }
 
 List.propTypes = {
-  list: PropTypes.arrayOf(
-    PropTypes.shape({
-      code: PropTypes.number,
-    })
+  items: PropTypes.arrayOf(
+    PropTypes.object
   ).isRequired,
-  buttonName: PropTypes.string.isRequired,
-  onHandleClick: PropTypes.func,
+  renderItem: PropTypes.node.isRequired
 };
 
-Item.propTypes = {
-  item: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    code: PropTypes.number.isRequired,
-    count: PropTypes.number,
-  }).isRequired,
-  count: PropTypes.number,
-  onHandleClick: PropTypes.func.isRequired,
-  buttonName: PropTypes.string.isRequired,
-};
-
-List.defaultProps = {
-  onHandleClick: () => {},
-};
 
 export default React.memo(List);

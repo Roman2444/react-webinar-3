@@ -5,6 +5,7 @@ import Head from "./components/head";
 import PageLayout from "./components/page-layout";
 import Modal from "./components/modal";
 import ShoppingCart from "./components/shopping-cart";
+import Item from "./components/item";
 
 /**
  * Приложение
@@ -38,7 +39,16 @@ function App({store}) {
       <PageLayout>
         <Head title="Магазин" />
         <Controls cart={cart} onOpenModal={() => setModalVisible(true)} />
-        <List list={list} buttonName='Добавить' onHandleClick={callbacks.onAddProductToCart} />
+        <List
+          items={list}
+          renderItem={(item) => (
+            <Item
+              item={item}
+              buttonName="Добавить"
+              onHandleClick={callbacks.onAddProductToCart}
+            />
+          )}
+        />
       </PageLayout>
       <Modal visible={modalVisible} setVisible={() => setModalVisible(false)}>
         <ShoppingCart

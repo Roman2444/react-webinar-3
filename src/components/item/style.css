@@ -1,6 +1,7 @@
 .Item {
   display: flex;
   justify-content: flex-start;
+  border-bottom: 1px dashed #ccc;
 }
 
 .Item-code {
