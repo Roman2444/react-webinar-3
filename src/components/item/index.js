@@ -13,7 +13,7 @@ function Item(props){
     <div className={"Item"} onClick={callbacks.onClick}>
       <div className="Item-code">{props.item.code}</div>
       <div className="Item-title">{props.item.title}</div>
-      <div className="Item-price">{props.item.price} &#8381;</div>
+      <div className="Item-price">{props.item.price.toLocaleString('ru-RU')} &#8381;</div>
       {props.item.count && (
         <div className="Item-count">{props.item.count} шт</div>
       )}
