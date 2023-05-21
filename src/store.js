@@ -84,8 +84,6 @@ class Store {
     })
   }
 
-
-
   /**
    * Добавление товара в корзину
    * @param code
@@ -97,8 +95,9 @@ class Store {
     );
     if (cartItemIndex !== -1) {
       // Если есть - увеличиваем кол-во на единицу
-      const updatedCart = [...this.state.cart];
-      updatedCart[cartItemIndex].count += 1;
+      const updatedCart = this.state.cart.map(item =>
+        item.code === code ? { ...item, count: item.count + 1 } : item
+      );
       this.setState({
         ...this.state,
         cart: updatedCart,
