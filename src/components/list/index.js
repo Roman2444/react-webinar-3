@@ -15,8 +15,7 @@ List.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.object
   ).isRequired,
-  renderItem: PropTypes.node.isRequired
-};
+  renderItem: PropTypes.func.isRequired,};
 
 
 export default React.memo(List);

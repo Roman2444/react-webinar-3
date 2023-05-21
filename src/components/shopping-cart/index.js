@@ -22,6 +22,7 @@ const ShoppingCart = ({ setVisible, cart, onDeleteProductFromCart }) => {
             items={cart}
             renderItem={(item) => (
               <Item
+                key={item.code}
                 item={item}
                 buttonName="Удалить"
                 onHandleClick={onDeleteProductFromCart}

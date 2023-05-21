@@ -43,6 +43,7 @@ function App({store}) {
           items={list}
           renderItem={(item) => (
             <Item
+              key={item.code}
               item={item}
               buttonName="Добавить"
               onHandleClick={callbacks.onAddProductToCart}
