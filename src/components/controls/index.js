@@ -2,17 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 import { plural } from "../../utils";
 import "./style.css";
-import Button from "../button"
+import Button from "../button";
 
-function Controls({ onOpenModal, cart }) {
-  const sum = cart.reduce((sum, item) => sum + item.price * item.count, 0);
-  const cartValue = cart.length ? (
+function Controls({onOpenModal, cartTotalInfo}) {
+  const cartValue = cartTotalInfo?.goodsCount > 0 ? (
     <b>
-      {`${cart.length} ${plural(cart.length, {
+      {`${cartTotalInfo.goodsCount} ${plural(cartTotalInfo.goodsCount, {
         one: "товар",
         few: "товара",
         many: "товаров",
-      })} / ${sum.toLocaleString('ru-RU')} `}
+      })} / ${cartTotalInfo.totalPrice.toLocaleString("ru-RU")} `}
       &#8381;
     </b>
   ) : (
@@ -29,17 +28,19 @@ function Controls({ onOpenModal, cart }) {
 }
 
 Controls.propTypes = {
-  cart: PropTypes.arrayOf(
-    PropTypes.shape({
-      price: PropTypes.number,
-      count: PropTypes.number,
-    })
-  ).isRequired,
+  cartTotalInfo: PropTypes.shape({
+    goodsCount: PropTypes.number.isRequired,
+    totalPrice: PropTypes.number.isRequired
+  }).isRequired,
   onOpenModal: PropTypes.func,
 };
 
 Controls.defaultProps = {
-  onOpenModal: () => {}
+  onOpenModal: () => {},
+  cartTotalInfo: {
+    goodsCount: 0,
+    totalPrice: 0
+  }
 };
 
 export default React.memo(Controls);

@@ -102,6 +102,16 @@ class Store {
         ...this.state,
         cart: updatedCart,
       });
+      this.setState({
+        ...this.state,
+        cartTotalInfo: {
+          goodsCount: this.state.cart.length,
+          totalPrice: this.state.cart.reduce(
+            (sum, item) => sum + item.count * item.price,
+            0
+          ),
+        },
+      });
     } else {
       // Если нет - добавляем новый элемент в корзину
       const productToAdd = this.state.list.find((item) => item.code === code);
@@ -117,6 +127,17 @@ class Store {
         ...this.state,
         cart: [...this.state.cart, newCartItem],
       });
+
+      this.setState({
+        ...this.state,
+        cartTotalInfo: {
+          goodsCount: this.state.cart.length,
+          totalPrice: this.state.cart.reduce(
+            (sum, item) => sum + item.count * item.price,
+            0
+          ),
+        },
+      });
     }
   }
 
@@ -129,6 +150,15 @@ class Store {
     this.setState({
       ...this.state,
       cart: updatedCart,
+    });
+    this.setState({
+      ...this.state,
+      cartTotalInfo: {
+        goodsCount: this.state.cart.length,
+        totalPrice: this.state.cart.reduce(
+          (sum, item) => sum + item.price * item.count, 0
+        ),
+      },
     });
   }
 }

@@ -17,6 +17,7 @@ function App({store}) {
 
   const list = store.getState().list;
   const cart = store.getState().cart;
+  const {cartTotalInfo} = store.getState();
 
   const callbacks = {
     onAddProductToCart: useCallback(
@@ -38,7 +39,7 @@ function App({store}) {
     <>
       <PageLayout>
         <Head title="Магазин" />
-        <Controls cart={cart} onOpenModal={() => setModalVisible(true)} />
+        <Controls cartTotalInfo={cartTotalInfo} onOpenModal={() => setModalVisible(true)} />
         <List
           items={list}
           renderItem={(item) => (
@@ -55,6 +56,7 @@ function App({store}) {
         <ShoppingCart
           onDeleteProductFromCart={callbacks.onDeleteProductFromCart}
           cart={cart}
+          totalPrice={cartTotalInfo?.totalPrice}
           setVisible={() => setModalVisible(false)}
         />
       </Modal>
