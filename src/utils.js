@@ -34,8 +34,13 @@ export function numberFormat(value, locale = 'ru-RU', options = {}) {
   return new Intl.NumberFormat(locale, options).format(value);
 }
 
-// Возвращает массив страниц для пагинации 
-// ==========================================
+/**
+ * Возвращает массив страниц для пагинации
+ * можно сразу обернуть в useMemo и поместить в хуки??
+ * @param totalPages {Number}
+ * @param page {Number}
+ * @returns {Array}
+ */
 
 export function getPagesArray(totalPages, page){
   const pages = [];

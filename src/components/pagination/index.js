@@ -12,7 +12,7 @@ const Pagination = ({ totalPages, page, setPage }) => {
     <div className="Pagination">
       {pagesArray.map((pageNumber, index) => {
         if (pageNumber === "...") {
-          return <span key={index}>&hellip;</span>;
+          return <span key={pageNumber + index}>&hellip;</span>;
         }
 
         return (
@@ -21,7 +21,7 @@ const Pagination = ({ totalPages, page, setPage }) => {
             className={`Pagination-block${
               pageNumber === page ? " selected" : ""
             }`}
-            key={pageNumber}
+            key={pageNumber + index}
           >
             {pageNumber}
           </div>
