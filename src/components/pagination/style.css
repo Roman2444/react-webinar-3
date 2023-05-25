@@ -1,0 +1,30 @@
+.Pagination {
+  display: flex;
+  justify-content: flex-end;
+  transition: background-color 1s;
+  padding: 22px;
+}
+
+.Pagination span {
+  color: #CCCCCC;
+  line-height: 23px;
+}
+
+.Pagination-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 2px 7px
+}
+
+.Pagination-block:hover:not(.selected) {
+  background: #E1E1E1;
+
+}
+.selected{
+  background-color: #0087E9;
+  color: #fff;
+}
+
+ 
