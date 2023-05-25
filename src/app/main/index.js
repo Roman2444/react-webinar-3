@@ -1,4 +1,4 @@
-import {memo, useCallback, useEffect, useState} from 'react';
+import {memo, useCallback, useEffect, useState, useMemo} from 'react';
 import Item from "../../components/item";
 import PageLayout from "../../components/page-layout";
 import Head from "../../components/head";
@@ -10,12 +10,11 @@ import Pagination from "../../components/pagination";
 
 function Main() {
   //задал limit, на случай 
-  //если придется изменить количество отображаемых товаров на странице
+  //если придется изменzть количество отображаемых товаров на странице
   const [limit, setLimit] = useState(10);
-
   //начальная страница
   const [page, setPage] = useState(1);
-
+  
   const store = useStore();
 
   useEffect(() => {
@@ -28,8 +27,10 @@ function Main() {
     sum: state.basket.sum,
     totalGoods: state.catalog.totalGoods
   }));
-  
-  console.log(select);
+
+  // получаем общее число страниц
+  const totalPages = useMemo(() => Math.ceil(select.totalGoods / limit), [select.totalGoods, limit])
+
   const callbacks = {
     // Добавление в корзину
     addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id), [store]),
@@ -49,7 +50,7 @@ function Main() {
       <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount}
                   sum={select.sum}/>
       <List list={select.list} renderItem={renders.item}/>
-      <Pagination limit={limit} totalGoods={select.totalGoods} page={page} setPage={setPage}/>
+      <Pagination totalPages={totalPages} page={page} setPage={setPage}/>
     </PageLayout>
 
   );

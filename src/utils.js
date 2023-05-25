@@ -33,3 +33,40 @@ export function codeGenerator(start = 0) {
 export function numberFormat(value, locale = 'ru-RU', options = {}) {
   return new Intl.NumberFormat(locale, options).format(value);
 }
+
+// Возвращает массив страниц для пагинации 
+// ==========================================
+
+export function getPagesArray(totalPages, page){
+  const pages = [];
+
+  // определение начальной и конечной страницы которая будет отображаться
+  // в пагинации, чтобы была не меньше 1 и не больше 1 максимальной
+  let startPage = Math.max(1, page - 1);
+  let endPage = Math.min(totalPages, page + 1);
+
+  if (startPage > 1) {
+    pages.push(1);
+    if (startPage > 2) {
+      pages.push("...");
+    }
+  }
+
+  for (let i = startPage; i <= endPage; i++) {
+    pages.push(i);
+  }
+
+// случай когда начальная страница 1 и д.б. пагинация на 3
+  if (page === 1) {
+    pages.push(3);
+  }
+
+  if (endPage < totalPages) {
+    if (endPage < totalPages - 1) {
+      pages.push("...");
+    }
+    pages.push(totalPages);
+  }
+
+  return pages;
+};
