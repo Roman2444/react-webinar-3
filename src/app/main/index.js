@@ -10,7 +10,7 @@ import Pagination from "../../components/pagination";
 
 function Main() {
   //задал limit, на случай 
-  //если придется изменzть количество отображаемых товаров на странице
+  //если придется изменять количество отображаемых товаров на странице
   const [limit, setLimit] = useState(10);
   //начальная страница
   const [page, setPage] = useState(1);
@@ -28,7 +28,7 @@ function Main() {
     totalGoods: state.catalog.totalGoods
   }));
 
-  // получаем общее число страниц
+  // получаем общее число страниц(можно перенести в utils)
   const totalPages = useMemo(() => Math.ceil(select.totalGoods / limit), [select.totalGoods, limit])
 
   const callbacks = {

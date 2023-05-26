@@ -19,7 +19,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Main/>}/>
-          <Route path="/articles" element={<SinglePropductPage/>}/>
+          <Route path="/articles/:id" element={<SinglePropductPage/>}/>
           <Route path="*" element={<Navigate to="/" />}/>
         </Routes>
       </BrowserRouter>

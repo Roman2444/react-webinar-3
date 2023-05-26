@@ -9,20 +9,19 @@ function ItemSingleProduct(props){
   const cn = bem('ItemSingleProduct');
 
   const callbacks = {
-    onAdd: (e) => props.onAdd(props.item._id)
+    onAdd: (e) => props.onAdd(props.article._id)
   }
 
   return (
     <div className={cn()}>
-      {/*<div className={cn('code')}>{props.item._id}</div>*/}
       <div className={cn('description')}>
-        {props.item.title} Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit totam explicabo optio placeat incidunt nemo asperiores voluptate nihil voluptatum. Tempore, praesentium maiores? Corporis obcaecati, similique dicta architecto sit magni. Pariatur.
+        {props.article.description} 
       </div>
-      <div className={cn('description')}>Страна происзводитель: {numberFormat(props.item.price)} ₽</div>
-      <div className={cn('description')}>Категрия: {numberFormat(props.item.price)} ₽</div>
-      <div className={cn('description')}>Год выпуска: {numberFormat(props.item.price)} ₽</div>
+      <div className={cn('description')}>Страна происзводитель: <b>{props.article.madeIn?.title} ({props.article.madeIn?.code})</b></div>
+      <div className={cn('description')}>Категория: <b>{props.article.category?.title}</b></div>
+      <div className={cn('description')}>Год выпуска:<b>{props.article.edition} </b></div>
 
-      <div className={cn('price')}>Цена: {numberFormat(props.item.price)} ₽</div>
+      <div className={cn('price')}>Цена: {numberFormat(props.article.price)} ₽</div>
       <div className={cn('actions')}>
         <button onClick={callbacks.onAdd}>Добавить</button>
       </div>
@@ -31,21 +30,24 @@ function ItemSingleProduct(props){
 }
 
 ItemSingleProduct.propTypes = {
-  item: PropTypes.shape({
+  article: PropTypes.shape({
     _id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     title: PropTypes.string,
-    price: PropTypes.number
+    price: PropTypes.number,
+    category: PropTypes.shape({
+      title: PropTypes.string,
+    }),
+    description: PropTypes.string,
+    madeIn: PropTypes.shape({
+      title: PropTypes.string,
+      code: PropTypes.string
+    })
   }).isRequired,
   onAdd: PropTypes.func,
 };
 
 ItemSingleProduct.defaultProps = {
   onAdd: () => {},
-  item: {
-    _id: 555,
-    title: 'Название товара',
-    price: 555
-  }
 }
 
 export default memo(ItemSingleProduct);

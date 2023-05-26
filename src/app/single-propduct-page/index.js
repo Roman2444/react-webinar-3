@@ -1,5 +1,5 @@
 import { memo, useCallback, useEffect, useState, useMemo } from "react";
-import Item from "../../components/item";
+import { useParams } from "react-router-dom";
 import PageLayout from "../../components/page-layout";
 import Head from "../../components/head";
 import BasketTool from "../../components/basket-tool";
@@ -9,17 +9,18 @@ import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 
 function SinglePropductPage() {
+  const params = useParams();
+   
   const store = useStore();
 
-  // useEffect(() => {
-  //   store.actions.catalog.load(limit, limit*page-limit);
-  // }, [page, limit]);
+  useEffect(() => {
+    store.actions.article.load(params.id);
+  }, []);
 
   const select = useSelector((state) => ({
-    list: state.catalog.list,
+    article: state.article.good,
     amount: state.basket.amount,
     sum: state.basket.sum,
-    totalGoods: state.catalog.totalGoods,
   }));
   const callbacks = {
     // Добавление в корзину
@@ -34,23 +35,17 @@ function SinglePropductPage() {
     ),
   };
 
-  // const renders = {
-  //   item: useCallback((item) => {
-  //     return <Item item={item} onAdd={callbacks.addToBasket}/>
-  //   }, [callbacks.addToBasket]),
-  // };
-
   return (
     <PageLayout>
-      <Head title="Название товара" />
+      <Head title={select.article.title} />
       <BasketTool
         onOpen={callbacks.openModalBasket}
         amount={select.amount}
         sum={select.sum}
       />
 
-      <ItemSinglePropduct onAdd={callbacks.addToBasket}>
-      </ItemSinglePropduct>
+      <ItemSinglePropduct article={select.article} onAdd={callbacks.addToBasket}/>
+    
     </PageLayout>
   );
 }
