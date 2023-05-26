@@ -5,17 +5,21 @@
   padding: 22px;
 }
 
-.Pagination span {
-  color: #CCCCCC;
-  line-height: 23px;
-}
 
 .Pagination-block {
   display: flex;
+  height: 20px;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  padding: 2px 7px
+  padding: 0px 5px;
+}
+
+.Pagination-block-empty {
+  height: 20px;
+  padding: 1px 1px ;
+
+  color: #CCCCCC;
 }
 
 .Pagination-block:hover:not(.selected) {
