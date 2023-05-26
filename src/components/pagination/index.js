@@ -1,9 +1,8 @@
-import React, { useMemo } from "react";
+import React, {useMemo} from "react";
 import "./style.css";
-import { getPagesArray } from "../../utils";
+import {getPagesArray} from "../../utils";
 
 const Pagination = ({ totalPages, page, setPage }) => {
-
   const pagesArray = useMemo(() => {
     return getPagesArray(totalPages, page);
   }, [totalPages, page]);
@@ -12,7 +11,11 @@ const Pagination = ({ totalPages, page, setPage }) => {
     <div className="Pagination">
       {pagesArray.map((pageNumber, index) => {
         if (pageNumber === "...") {
-          return <div className="Pagination-block-empty" key={pageNumber + index}>{pageNumber}</div>;
+          return (
+            <div className="Pagination-block-empty" key={pageNumber + index}>
+              {pageNumber}
+            </div>
+          );
         }
 
         return (

@@ -19,7 +19,7 @@ function ItemSingleProduct(props){
       </div>
       <div className={cn('description')}>Страна происзводитель: <b>{props.article.madeIn?.title} ({props.article.madeIn?.code})</b></div>
       <div className={cn('description')}>Категория: <b>{props.article.category?.title}</b></div>
-      <div className={cn('description')}>Год выпуска:<b>{props.article.edition} </b></div>
+      <div className={cn('description')}>Год выпуска: <b>{props.article.edition}</b></div>
 
       <div className={cn('price')}>Цена: {numberFormat(props.article.price)} ₽</div>
       <div className={cn('actions')}>

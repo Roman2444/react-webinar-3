@@ -1,5 +1,5 @@
-import { memo, useCallback, useEffect, useState, useMemo } from "react";
-import { useParams } from "react-router-dom";
+import {memo, useCallback, useEffect} from "react";
+import {useParams} from "react-router-dom";
 import PageLayout from "../../components/page-layout";
 import Head from "../../components/head";
 import BasketTool from "../../components/basket-tool";
@@ -43,9 +43,7 @@ function SinglePropductPage() {
         amount={select.amount}
         sum={select.sum}
       />
-
       <ItemSinglePropduct article={select.article} onAdd={callbacks.addToBasket}/>
-    
     </PageLayout>
   );
 }
