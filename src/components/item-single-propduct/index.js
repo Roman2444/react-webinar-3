@@ -15,11 +15,15 @@ function ItemSingleProduct(props){
   return (
     <div className={cn()}>
       {/*<div className={cn('code')}>{props.item._id}</div>*/}
-      <div className={cn('title')}>
-        {props.item.title}
+      <div className={cn('description')}>
+        {props.item.title} Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit totam explicabo optio placeat incidunt nemo asperiores voluptate nihil voluptatum. Tempore, praesentium maiores? Corporis obcaecati, similique dicta architecto sit magni. Pariatur.
       </div>
+      <div className={cn('description')}>Страна происзводитель: {numberFormat(props.item.price)} ₽</div>
+      <div className={cn('description')}>Категрия: {numberFormat(props.item.price)} ₽</div>
+      <div className={cn('description')}>Год выпуска: {numberFormat(props.item.price)} ₽</div>
+
+      <div className={cn('price')}>Цена: {numberFormat(props.item.price)} ₽</div>
       <div className={cn('actions')}>
-        <div className={cn('price')}>{numberFormat(props.item.price)} ₽</div>
         <button onClick={callbacks.onAdd}>Добавить</button>
       </div>
     </div>

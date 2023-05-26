@@ -49,7 +49,7 @@ function SinglePropductPage() {
         sum={select.sum}
       />
 
-      <ItemSinglePropduct>
+      <ItemSinglePropduct onAdd={callbacks.addToBasket}>
       </ItemSinglePropduct>
     </PageLayout>
   );

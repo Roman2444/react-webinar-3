@@ -45,16 +45,22 @@ export function numberFormat(value, locale = 'ru-RU', options = {}) {
 export function getPagesArray(totalPages, page){
   const pages = [];
 
-  // определение начальной и конечной страницы которая будет отображаться
-  // в пагинации, чтобы была не меньше 1 и не больше 1 максимальной
+  // определение соседних со стартовой страницей, которые будут отрисовываться
+  // в пагинации, чтобы были  меньше и больше на 1 от стартовой,
+  // а также не могли быть меньше 1 и больше общего количества страниц
   let startPage = Math.max(1, page - 1);
   let endPage = Math.min(totalPages, page + 1);
 
   if (startPage > 1) {
     pages.push(1);
-    if (startPage > 2) {
+    if (startPage > 2 && totalPages > 4) {
       pages.push("...");
     }
+  }
+// случай когда стартовая страница последняя и по аналогии
+// должна быть пагинация на две страницы назад
+  if (page === totalPages && totalPages > 3) {
+    pages.push(totalPages - 2);
   }
 
   for (let i = startPage; i <= endPage; i++) {
@@ -62,12 +68,12 @@ export function getPagesArray(totalPages, page){
   }
 
 // случай когда начальная страница 1 и д.б. пагинация на 3
-  if (page === 1) {
+  if (page === 1 && totalPages > 3) {
     pages.push(3);
   }
 
   if (endPage < totalPages) {
-    if (endPage < totalPages - 1) {
+    if (endPage < totalPages - 1 && totalPages > 4) {
       pages.push("...");
     }
     pages.push(totalPages);
