@@ -8,6 +8,7 @@ import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 import Pagination from "../../components/pagination";
 import Loader from "../../components/loader";
+import NavMenu from "../../components/nav-menu";
 
 function Main() {
   //задал limit, на случай
@@ -61,11 +62,13 @@ function Main() {
   return (
     <PageLayout>
       <Head title="Магазин" />
-      <BasketTool
-        onOpen={callbacks.openModalBasket}
-        amount={select.amount}
-        sum={select.sum}
-      />
+      <NavMenu>
+        <BasketTool
+          onOpen={callbacks.openModalBasket}
+          amount={select.amount}
+          sum={select.sum}
+        />
+      </NavMenu>
       {select.isLoading ? (
         <Loader />
       ) : (

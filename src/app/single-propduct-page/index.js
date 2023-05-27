@@ -5,6 +5,7 @@ import Head from "../../components/head";
 import BasketTool from "../../components/basket-tool";
 import ItemSinglePropduct from "../../components/item-single-propduct";
 import Loader from "../../components/loader";
+import NavMenu from "../../components/nav-menu";
 
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
@@ -40,11 +41,13 @@ function SinglePropductPage() {
   return (
     <PageLayout>
       <Head title={select.article.title} />
-      <BasketTool
-        onOpen={callbacks.openModalBasket}
-        amount={select.amount}
-        sum={select.sum}
-      />
+      <NavMenu>
+        <BasketTool
+          onOpen={callbacks.openModalBasket}
+          amount={select.amount}
+          sum={select.sum}
+        />
+      </NavMenu>
       {select.isLoading ? (
         <Loader />
       ) : (
