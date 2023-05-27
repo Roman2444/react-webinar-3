@@ -1,5 +1,5 @@
 import {useCallback, useContext, useEffect, useState} from 'react';
-import { BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
+import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
 import Main from "./main";
 import Basket from "./basket";
 import useStore from "../store/use-store";
@@ -22,8 +22,8 @@ function App() {
           <Route path="/articles/:id" element={<SinglePropductPage/>}/>
           <Route path="*" element={<Navigate to="/" />}/>
         </Routes>
+        {activeModal === 'basket' && <Basket/>}
       </BrowserRouter>
-      {activeModal === 'basket' && <Basket/>}
     </>
   );
 }
