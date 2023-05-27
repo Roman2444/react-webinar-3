@@ -7,7 +7,7 @@ import './style.css';
 function BasketTool({sum, amount, onOpen}) {
   const cn = bem('BasketTool');
   return (
-    <div className={cn('')}>
+    <div className={cn()}>
       <span className={cn('label')}>В корзине:</span>
       <span className={cn('total')}>
         {amount
