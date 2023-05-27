@@ -4,13 +4,14 @@ import PageLayout from "../../components/page-layout";
 import Head from "../../components/head";
 import BasketTool from "../../components/basket-tool";
 import ItemSinglePropduct from "../../components/item-single-propduct";
- 
+import Loader from "../../components/loader";
+
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 
 function SinglePropductPage() {
   const params = useParams();
-   
+
   const store = useStore();
 
   useEffect(() => {
@@ -21,6 +22,7 @@ function SinglePropductPage() {
     article: state.article.good,
     amount: state.basket.amount,
     sum: state.basket.sum,
+    isLoading: state.article.isLoading,
   }));
   const callbacks = {
     // Добавление в корзину
@@ -43,7 +45,14 @@ function SinglePropductPage() {
         amount={select.amount}
         sum={select.sum}
       />
-      <ItemSinglePropduct article={select.article} onAdd={callbacks.addToBasket}/>
+      {select.isLoading ? (
+        <Loader />
+      ) : (
+        <ItemSinglePropduct
+          article={select.article}
+          onAdd={callbacks.addToBasket}
+        />
+      )}
     </PageLayout>
   );
 }
