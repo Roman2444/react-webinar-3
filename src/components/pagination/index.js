@@ -2,7 +2,7 @@ import React, {useMemo} from "react";
 import "./style.css";
 import {getPagesArray} from "../../utils";
 
-const Pagination = ({ totalPages, page, setPage }) => {
+function Pagination({ totalPages, page, setPage }) {
   const pagesArray = useMemo(() => {
     return getPagesArray(totalPages, page);
   }, [totalPages, page]);
