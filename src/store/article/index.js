@@ -11,16 +11,25 @@ class Article extends StoreModule {
   initState() {
     return {
       good: {},
+      isLoading: false
     }
   }
 
   async load(id) {
-    const response = await fetch(`/api/v1/articles/${id}?fields=*,madeIn(title,code),category(title)`);
-    const json = await response.json();
-    this.setState({
-       ...this.getState(),
-       good: json.result,
-    }, 'Загружен товар из АПИ');
+    try {
+      this.setState({...this.getState(), isLoading: true}, 'Идёт загрузка товара из АПИ');
+      const response = await fetch(`/api/v1/articles/${id}?fields=*,madeIn(title,code),category(title)`);
+      const json = await response.json();
+      this.setState({
+         ...this.getState(),
+         good: json.result,
+      }, 'Товар из АПИ получен и сохранен в Store');
+    } catch (e) {
+      console.error(e);
+    } finally {
+      this.setState({...this.getState(), isLoading: false}, 'Загрузка товара из АПИ окончена');
+    }
+
   }
 }
 
