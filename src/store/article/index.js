@@ -18,7 +18,7 @@ class Article extends StoreModule {
   async load(id) {
     try {
       this.setState({...this.getState(), isLoading: true}, 'Идёт загрузка товара из АПИ');
-      const response = await fetch(`/api/v1/articles/${id}?fields=*,madeIn(title,code),category(title)`);
+      const response = await fetch(`/api/v1/articles/${id}?fields=title,description,price,edition,madeIn(title,code),category(title)`);
       const json = await response.json();
       this.setState({
          ...this.getState(),
