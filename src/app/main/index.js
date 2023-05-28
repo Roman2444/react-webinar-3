@@ -8,6 +8,7 @@ import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 import Pagination from "../../components/pagination";
 import Loader from "../../components/loader";
+import LoaderWrapper from "../../components/loader-wrapper";
 import NavMenu from "../../components/nav-menu";
 
 function Main() {
@@ -69,11 +70,9 @@ function Main() {
           sum={select.sum}
         />
       </NavMenu>
-      {select.isLoading ? (
-        <Loader />
-      ) : (
+      <LoaderWrapper loader={<Loader/>} isLoading={select.isLoading}>
         <List list={select.list} renderItem={renders.item} />
-      )}
+      </LoaderWrapper>
       <Pagination totalPages={totalPages} page={page} setPage={setPage} />
     </PageLayout>
   );
