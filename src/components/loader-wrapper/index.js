@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./style.css";
 
 function LoaderWrapper({ children, isLoading, loader }) {
@@ -15,5 +16,11 @@ function LoaderWrapper({ children, isLoading, loader }) {
     </>
   );
 }
+
+LoaderWrapper.propTypes = {
+  children: PropTypes.node.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  loader: PropTypes.element.isRequired,
+};
 
 export default LoaderWrapper;

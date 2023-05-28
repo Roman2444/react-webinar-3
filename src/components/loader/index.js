@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./style.css";
  
 
@@ -9,5 +10,9 @@ function Loader({children, ...props}) {
       </div>
   );
 };
+
+Loader.propTypes = {
+  children: PropTypes.node,
+}
 
 export default Loader;

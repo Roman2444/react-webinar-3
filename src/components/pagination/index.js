@@ -1,5 +1,6 @@
 import React, {useMemo} from "react";
 import "./style.css";
+import PropTypes from "prop-types";
 import {getPagesArray} from "../../utils";
 
 function Pagination({ totalPages, page, setPage }) {
@@ -32,6 +33,12 @@ function Pagination({ totalPages, page, setPage }) {
       })}
     </div>
   );
+};
+
+Pagination.propTypes = {
+  totalPages: PropTypes.number.isRequired,
+  page: PropTypes.number.isRequired,
+  setPage: PropTypes.func.isRequired,
 };
 
 export default Pagination;
