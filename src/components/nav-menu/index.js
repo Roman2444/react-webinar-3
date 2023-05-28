@@ -7,7 +7,7 @@ import "./style.css";
 function NavMenu({ children }) {
   const cn = bem("NavMenu");
   return (
-    <div className={cn("")}>
+    <div className={cn()}>
       <div className={cn("navigation")}>
         <Link className={cn("link")} to="/">
           Главная
