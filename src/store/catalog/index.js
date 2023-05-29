@@ -12,7 +12,9 @@ class Catalog extends StoreModule {
     return {
       list: [],
       totalGoods: 0,
-      isLoading: false
+      isLoading: false,
+      limit: 10,  
+      pageCurrent: 1
     }
   }
 
@@ -32,6 +34,15 @@ class Catalog extends StoreModule {
       this.setState({...this.getState(), isLoading: false}, 'Загрузка товаров из АПИ окончена');
     }
   }
+  setPageCurrent(current) {
+    this.setState({
+      ...this.getState(),
+      pageCurrent:  current
+    }, 'Установлена текущая страница: ' + current);
+  }
+
+
+
 }
 
 export default Catalog;

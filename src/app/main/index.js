@@ -12,17 +12,8 @@ import LoaderWrapper from "../../components/loader-wrapper";
 import NavMenu from "../../components/nav-menu";
 
 function Main() {
-  //задал limit, на случай
-  //если придется изменять количество отображаемых товаров на странице
-  const [limit, setLimit] = useState(10);
-  //начальная страница
-  const [page, setPage] = useState(1);
 
   const store = useStore();
-
-  useEffect(() => {
-    store.actions.catalog.load(limit, limit * page - limit);
-  }, [page, limit]);
 
   const select = useSelector((state) => ({
     list: state.catalog.list,
@@ -30,12 +21,19 @@ function Main() {
     sum: state.basket.sum,
     totalGoods: state.catalog.totalGoods,
     isLoading: state.catalog.isLoading,
+    limit: state.catalog.limit,
+    pageCurrent: state.catalog.pageCurrent
   }));
+  
+
+  useEffect(() => {
+    store.actions.catalog.load(select.limit, select.limit * select.pageCurrent - select.limit);
+  }, [select.pageCurrent, select.limit]);
 
   // получаем общее число страниц(можно перенести в utils)
   const totalPages = useMemo(
-    () => Math.ceil(select.totalGoods / limit),
-    [select.totalGoods, limit]
+    () => Math.ceil(select.totalGoods / select.limit),
+    [select.totalGoods, select.limit]
   );
 
   const callbacks = {
@@ -47,6 +45,12 @@ function Main() {
     // Открытие модалки корзины
     openModalBasket: useCallback(
       () => store.actions.modals.open("basket"),
+      [store]
+    ),
+
+    // Установка текущей страницы
+    setPageCurrent: useCallback(
+      (current) => store.actions.catalog.setPageCurrent(current),
       [store]
     ),
   };
@@ -73,7 +77,7 @@ function Main() {
       <LoaderWrapper loader={<Loader/>} isLoading={select.isLoading}>
         <List list={select.list} renderItem={renders.item} />
       </LoaderWrapper>
-      <Pagination totalPages={totalPages} page={page} setPage={setPage} />
+      <Pagination totalPages={totalPages} page={select.pageCurrent} setPage={callbacks.setPageCurrent} />
     </PageLayout>
   );
 }
