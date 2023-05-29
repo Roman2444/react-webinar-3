@@ -17,7 +17,7 @@ function SinglePropductPage() {
 
   useEffect(() => {
     store.actions.article.load(params.id);
-  }, []);
+  }, [params.id]);
 
   const select = useSelector((state) => ({
     article: state.article.good,
