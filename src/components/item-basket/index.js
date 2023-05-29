@@ -12,14 +12,16 @@ function ItemBasket(props) {
 
   const callbacks = {
     onRemove: (e) => props.onRemove(props.item._id),
-    onClose: (e) => props.onClose()
+    onClose: (e) => props.onClose(),
   };
+
+  const linkTo = props.linkTo || `/articles/${props.item._id}`;
 
   return (
     <div className={cn()}>
       {/*<div className={cn('code')}>{props.item._id}</div>*/}
-      <div onClick={callbacks.onClose} className={cn('title')}>
-        <Link className={cn('link')} to={`/articles/${props.item._id}`}>
+      <div  className={cn('title')}>
+        <Link to={linkTo} onClick={callbacks.onClose} className={cn('link')} >
           {props.item.title}
         </Link>
       </div>
