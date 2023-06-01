@@ -25,7 +25,6 @@ class CategoriesState extends StoreModule {
     try {
       const response = await fetch(`/api/v1/categories?fields=_id,title,parent(_id)&limit=*`);
       const json = await response.json();
-      console.log(json);
 
       // Категории загружены успешно
       this.setState({

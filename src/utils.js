@@ -33,3 +33,40 @@ export function codeGenerator(start = 0) {
 export function numberFormat(value, locale = 'ru-RU', options = {}) {
   return new Intl.NumberFormat(locale, options).format(value);
 }
+
+// добавляет "-" в зависимости от количества родителей
+export function modifyCategoryItems(items) {
+  // Создаем новый массив для измененных объектов
+  const newItems = [];
+
+  // Проходим по каждому элементу в исходном массиве items
+  for (let i = 0; i < items.length; i++) {
+    const currentItem = items[i];
+    
+    // Проверяем есть ли у элемента родитель
+    if (currentItem.parent && currentItem.parent._id) {
+      let parentCount = 1;
+      let currentParentID = currentItem.parent._id;
+
+      // Ищем всех предков до корневого
+      while (currentParentID) {
+        const parentItem = items.find(item => item._id === currentParentID);
+
+        if (parentItem && parentItem.parent && parentItem.parent._id) {
+          parentCount++;
+          currentParentID = parentItem.parent._id;
+        } else {
+          currentParentID = null;
+        }
+      }
+
+      // Добавляем знак "-" для каждого родительского уровня
+      currentItem.title = "-".repeat(parentCount) + " " + currentItem.title;
+    }
+
+    // Добавляем измененный элемент в новый массив
+    newItems.push(currentItem);
+  }
+
+  return newItems;
+}
