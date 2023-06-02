@@ -1,4 +1,4 @@
-import { memo, useCallback, useMemo } from "react";
+import {memo, useCallback, useMemo} from "react";
 import useTranslate from "../../hooks/use-translate";
 import useStore from "../../hooks/use-store";
 import useSelector from "../../hooks/use-selector";
@@ -22,9 +22,7 @@ function CatalogFilter() {
   const callbacks = {
     // Категория
     onCategory: useCallback(
-      category => store.actions.catalog.setParams({category, page: 1}),
-      [store]
-    ),
+      category => store.actions.catalog.setParams({category, page: 1}),[store]),
     // Сортировка
     onSort: useCallback(sort => store.actions.catalog.setParams({sort}), [store]),
     // Поиск
