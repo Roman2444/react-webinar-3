@@ -8,9 +8,9 @@ import PageLayout from "../../components/page-layout";
 import Head from "../../components/head";
 import Navigation from "../../containers/navigation";
 import LocaleSelect from "../../containers/locale-select";
-import LoginForm from "../../components/login-form";
+ 
 
-function Login() {
+function Profile() {
   const store = useStore();
 
   // Параметры из пути /articles/:id
@@ -35,10 +35,10 @@ function Login() {
         <LocaleSelect/>
       </Head>
       <Navigation/>
-      <LoginForm/>
+ 
 
     </PageLayout>
   );
 }
 
-export default memo(Login);
+export default memo(Profile);
