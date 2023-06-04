@@ -9,7 +9,9 @@ import Head from "../../components/head";
 import Navigation from "../../containers/navigation";
 import LocaleSelect from "../../containers/locale-select";
 import ProfileLayout from "../../components/profile-layout";
-
+import SideLayout from "../../components/side-layout";
+import AuthPanelControl from "../../containers/auth-panel-control";
+import Spinner from "../../components/spinner";
 function Profile() {
   const store = useStore();
 
@@ -31,11 +33,14 @@ function Profile() {
 
   return (
     <PageLayout>
+      <SideLayout side="end" padding="medium">
+        <AuthPanelControl />
+      </SideLayout>
       <Head title={t("title")}>
         <LocaleSelect />
       </Head>
       <Navigation />
-      <ProfileLayout user={select.user} />
+      {select.waiting ? <Spinner /> : <ProfileLayout user={select.user} />}
     </PageLayout>
   );
 }

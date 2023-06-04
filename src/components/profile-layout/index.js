@@ -1,5 +1,5 @@
 import {memo, useState} from "react";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 import {cn as bem} from '@bem-react/classname';
 import './style.css';
 
@@ -16,19 +16,14 @@ console.log('PropfileLayout',props)
     </div>
   );
 }
-// {props.user.name}
-// LoginForm.propTypes = {
-//   handleFetchLogin: PropTypes.func,
-//   onChangeLogin: PropTypes.func,
-//   onChangePassword: PropTypes.func,
-//   //errorMessage: propTypes.string
-// };
 
-// LoginForm.defaultProps = {
-//   handleFetchLogin: () => {},
-//   onChangeLogin: () => {},
-//   onChangePassword: () => {},
-//   //errorMessage: 'текст ошибки'
-// }
+
+PropfileLayout.propTypes = {
+  user: propTypes.object
+}
+
+PropfileLayout.defaultProps = {
+  user: {}
+}
 
 export default memo(PropfileLayout);
