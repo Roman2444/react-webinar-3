@@ -36,19 +36,15 @@ export function numberFormat(value, locale = 'ru-RU', options = {}) {
 
 // добавляет "-" в зависимости от количества родителей
 export function modifyCategoryItems(items) {
-  // Создаем новый массив для измененных объектов
   const newItems = [];
 
-  // Проходим по каждому элементу в исходном массиве items
   for (let i = 0; i < items.length; i++) {
     const currentItem = items[i];
     
-    // Проверяем есть ли у элемента родитель
     if (currentItem.parent && currentItem.parent._id) {
       let parentCount = 1;
       let currentParentID = currentItem.parent._id;
 
-      // Ищем всех предков до корневого
       while (currentParentID) {
         const parentItem = items.find(item => item._id === currentParentID);
 
@@ -62,10 +58,16 @@ export function modifyCategoryItems(items) {
 
       // Добавляем знак "-" для каждого родительского уровня
       currentItem.title = "-".repeat(parentCount) + " " + currentItem.title;
-    }
 
-    // Добавляем измененный элемент в новый массив
-    newItems.push(currentItem);
+      // Находим индекс родительского элемента
+      const parentIndex = newItems.findIndex(element => element._id === currentItem.parent._id);
+
+      // Добавляем текущий элемент после его родителя
+      newItems.splice(parentIndex + 1, 0, currentItem);
+    } else {
+      // Добавляем элемент в начало нового массива
+      newItems.unshift(currentItem);
+    }
   }
 
   return newItems;

@@ -8,6 +8,8 @@ import Head from "../../components/head";
 import CatalogFilter from "../../containers/catalog-filter";
 import CatalogList from "../../containers/catalog-list";
 import LocaleSelect from "../../containers/locale-select";
+import SideLayout from "../../components/side-layout";
+import AuthPanel from '../../components/auth-panel';
 
 function Main() {
 
@@ -22,6 +24,9 @@ function Main() {
 
   return (
     <PageLayout>
+      <SideLayout side="end" padding="medium">
+        <AuthPanel/>
+      </SideLayout>
       <Head title={t('title')}>
         <LocaleSelect/>
       </Head>
