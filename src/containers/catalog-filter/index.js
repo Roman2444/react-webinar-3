@@ -17,8 +17,6 @@ function CatalogFilter() {
     categories: state.categories.categories,
   }));
 
-  console.log("categiries", select.categories);
-
   const callbacks = {
     // Категория
     onCategory: useCallback(

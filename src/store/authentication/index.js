@@ -1,8 +1,8 @@
 import StoreModule from "../module";
+  /**
+      аутентификация
+   */
 
-/**
- * Детальная ифнормация о товаре для страницы товара
- */
 class AuthenticationState extends StoreModule {
   initState() {
     return {
@@ -14,9 +14,6 @@ class AuthenticationState extends StoreModule {
     };
   }
 
-  /**
-      аутентификация
-   */
 
   async signIn(login, password) {
     this.setState({
@@ -68,6 +65,78 @@ class AuthenticationState extends StoreModule {
       ...this.getState(),
       errorMessage: ""
     });
+  }
+
+  async signOut() {
+    this.setState({
+      ...this.getState(),
+      waiting: true
+    })
+    try {
+      const res = await fetch('/api/v1/users/sign', {
+        method: 'DELETE',
+        body: null,
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Token': `${this.getState().token}`
+        }
+      })
+
+      localStorage.removeItem('token');
+      this.setState({
+        user: {},
+        token: "",
+        errorMessage: "",
+        waiting: false,
+        isAuth: false
+      })
+    } catch(e) {
+      console.error(e);
+      this.setState({
+        ...this.getState(),
+        waiting: false
+      });
+    }
+  }
+
+  async signInByToken() {
+    try {
+      this.setState({
+        ...this.getState(),
+        waiting: true
+      });
+
+      const res = await fetch('/api/v1/users/self?fields=profile(name)', {
+        method: 'GET',
+        body: null,
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Token': this.getState().token
+        }
+      })
+
+      if(!res.ok) {
+        throw new Error(`Неверный токен`);
+      }
+
+      const data = await res.json();
+
+      console.log(data)
+
+      this.setState({
+        ...this.getState(),
+        user: data.result.profile,
+        errorMessage: "",
+        waiting: false,
+        isAuth: true
+      });
+    } catch(e) {
+      this.setState({
+        ...this.getState(),
+        waiting: false
+      });
+      localStorage.removeItem('token');
+    }
   }
 
 }

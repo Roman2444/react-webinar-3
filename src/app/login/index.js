@@ -10,7 +10,7 @@ import Navigation from "../../containers/navigation";
 import LocaleSelect from "../../containers/locale-select";
 import LoginFormControl from "../../containers/login-form-control";
 import SideLayout from "../../components/side-layout";
-import AuthPanel from "../../components/auth-panel";
+import AuthPanelControl from "../../containers/auth-panel-control";
  
 
 function Login() {
@@ -33,9 +33,7 @@ function Login() {
   return (
     <PageLayout>
       <SideLayout side="end" padding="medium">
-        {/* { select.isAuth ? <AuthPanel/> :  <button>войти</button> } */}
-        <button onClick={() => navigate("/login")}>войти</button>
-        <AuthPanel />
+        <AuthPanelControl />
       </SideLayout>
       <Head title={t("title")}>
         <LocaleSelect />

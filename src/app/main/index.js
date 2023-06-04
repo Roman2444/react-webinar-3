@@ -12,7 +12,7 @@ import CatalogFilter from "../../containers/catalog-filter";
 import CatalogList from "../../containers/catalog-list";
 import LocaleSelect from "../../containers/locale-select";
 import SideLayout from "../../components/side-layout";
-import AuthPanel from '../../components/auth-panel';
+import AuthPanelControl from '../../containers/auth-panel-control';
 
 function Main() {
 
@@ -29,9 +29,7 @@ function Main() {
   return (
     <PageLayout>
       <SideLayout side="end" padding="medium">
-        {/* { select.isAuth ? <AuthPanel/> :  <button>войти</button> } */}
-        <button onClick={() => navigate("/login")}>войти</button>
-        <AuthPanel/>
+        <AuthPanelControl/>
       </SideLayout>
       <Head title={t('title')}>
         <LocaleSelect/>

@@ -1,5 +1,5 @@
-import {memo, useCallback, useMemo} from 'react';
-import {useParams} from "react-router-dom";
+import { memo, useEffect, useCallback, useMemo } from "react";
+import { useParams } from "react-router-dom";
 import useStore from "../../hooks/use-store";
 import useSelector from "../../hooks/use-selector";
 import useTranslate from "../../hooks/use-translate";
@@ -8,35 +8,34 @@ import PageLayout from "../../components/page-layout";
 import Head from "../../components/head";
 import Navigation from "../../containers/navigation";
 import LocaleSelect from "../../containers/locale-select";
- 
+import ProfileLayout from "../../components/profile-layout";
 
 function Profile() {
   const store = useStore();
 
-  // Параметры из пути /articles/:id
   const params = useParams();
 
-  // useInit(() => {
-  //   store.actions.article.load(params.id);
-  // }, [params.id]);
+  const select = useSelector((state) => ({
+    user: state.profile.user,
+    waiting: state.profile.waiting,
+    token: state.authentication.token,
+  }));
 
-  // const select = useSelector(state => ({
-  //   article: state.article.data,
-  //   waiting: state.article.waiting,
-  // }));
+  useEffect(() => {
+    store.actions.profile.loadUser(select.token);
+  }, []);
 
-  const {t} = useTranslate();
+  const { t } = useTranslate();
 
- 
+  console.log(select.user);
 
   return (
     <PageLayout>
-      <Head title={t('title')}>
-        <LocaleSelect/>
+      <Head title={t("title")}>
+        <LocaleSelect />
       </Head>
-      <Navigation/>
- 
-
+      <Navigation />
+      <ProfileLayout user={select.user} />
     </PageLayout>
   );
 }

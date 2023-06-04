@@ -18,8 +18,8 @@ function LoginFormControl() {
   }));
 
   const [fields, setFields] = useState({
-    login: "",
-    password: "",
+    login: "test_1",
+    password: "123456",
   });
 
   const callbacks = {

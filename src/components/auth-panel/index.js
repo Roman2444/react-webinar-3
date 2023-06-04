@@ -11,14 +11,14 @@ function AuthPanel({onLogout, user}) {
   return(
     <div className={cn('container')}>
       <Link className={cn('link')} to="/profile">{user}</Link>
-      <button callback={onLogout} >выйти</button>
+      <button onClick={onLogout} >выйти</button>
     </div>
   )
 }
 
 AuthPanel.propTypes = {
   //onLogout: propTypes.func,
- // user: propTypes.string
+  //user: propTypes.string
 }
 
 AuthPanel.defaultProps = {
