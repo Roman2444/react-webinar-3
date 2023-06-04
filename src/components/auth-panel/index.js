@@ -6,30 +6,22 @@ import './style.css';
 
 function AuthPanel({onLogout, user}) {
   const cn = bem('AuthPanel');
+
+
   return(
     <div className={cn('container')}>
       <Link className={cn('link')} to="/profile">{user}</Link>
-      <button callback={onLogout} >войти</button>
+      <button callback={onLogout} >выйти</button>
     </div>
   )
 }
 
-// ArticleCard.propTypes = {
-//   article: PropTypes.shape({
-//     _id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-//     description: PropTypes.string,
-//     madeIn: PropTypes.object,
-//     category: PropTypes.object,
-//     edition: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-//     price: PropTypes.number
-//   }).isRequired,
-//   onAdd: PropTypes.func,
-//   t: PropTypes.func
-// };
+AuthPanel.propTypes = {
+  //onLogout: propTypes.func,
+ // user: propTypes.string
+}
 
-// ArticleCard.defaultProps = {
-//   onAdd: () => {},
-//   t: (text) => text
-// }
-
+AuthPanel.defaultProps = {
+  user: "тестовый пользователь"
+}
 export default memo(AuthPanel);

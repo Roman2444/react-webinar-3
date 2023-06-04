@@ -1,4 +1,7 @@
 import {memo} from 'react';
+import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+
 import useStore from "../../hooks/use-store";
 import useTranslate from "../../hooks/use-translate";
 import useInit from "../../hooks/use-init";
@@ -14,6 +17,7 @@ import AuthPanel from '../../components/auth-panel';
 function Main() {
 
   const store = useStore();
+  const navigate = useNavigate();
 
   useInit(() => {
     store.actions.catalog.initParams();
@@ -25,6 +29,8 @@ function Main() {
   return (
     <PageLayout>
       <SideLayout side="end" padding="medium">
+        {/* { select.isAuth ? <AuthPanel/> :  <button>войти</button> } */}
+        <button onClick={() => navigate("/login")}>войти</button>
         <AuthPanel/>
       </SideLayout>
       <Head title={t('title')}>
