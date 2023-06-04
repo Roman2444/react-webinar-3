@@ -17,11 +17,8 @@ function AuthPanel({onLogout, user}) {
 }
 
 AuthPanel.propTypes = {
-  //onLogout: propTypes.func,
-  //user: propTypes.string
+  onLogout: PropTypes.func,
+  user: PropTypes.string
 }
 
-AuthPanel.defaultProps = {
-  user: "тестовый пользователь"
-}
 export default memo(AuthPanel);

@@ -25,6 +25,7 @@ function App() {
 
   useEffect(() => {
     if (select.token) {
+      console.log('Пользователь авторизован');
       store.actions.authentication.signInByToken();
     }
   }, []);

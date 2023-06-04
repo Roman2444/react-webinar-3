@@ -7,7 +7,7 @@ class AuthenticationState extends StoreModule {
   initState() {
     return {
       user: {},
-      token: "",
+      token: localStorage.getItem('token'),
       waiting: false,
       isAuth: false,
       errorMessage: "",

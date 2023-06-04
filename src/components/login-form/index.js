@@ -43,14 +43,7 @@ LoginForm.propTypes = {
   handleFetchLogin: PropTypes.func,
   onChangeLogin: PropTypes.func,
   onChangePassword: PropTypes.func,
-  //errorMessage: propTypes.string
+  errorMessage: PropTypes.string
 };
-
-LoginForm.defaultProps = {
-  handleFetchLogin: () => {},
-  onChangeLogin: () => {},
-  onChangePassword: () => {},
-  //errorMessage: 'текст ошибки'
-}
 
 export default memo(LoginForm);

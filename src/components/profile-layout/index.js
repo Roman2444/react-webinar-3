@@ -1,5 +1,5 @@
 import {memo, useState} from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import {cn as bem} from '@bem-react/classname';
 import './style.css';
 
@@ -19,7 +19,7 @@ console.log('PropfileLayout',props)
 
 
 PropfileLayout.propTypes = {
-  user: propTypes.object
+  user: PropTypes.object
 }
 
 PropfileLayout.defaultProps = {
