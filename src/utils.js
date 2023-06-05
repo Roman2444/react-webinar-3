@@ -61,7 +61,7 @@ export function modifyCategoryItems(items) {
       }
 
       // Добавляем знак "-" для каждого родительского уровня
-      currentItem.title = "-".repeat(parentCount) + " " + currentItem.title;
+      currentItem.title = "- ".repeat(parentCount) + currentItem.title;
 
       // Находим индекс родительского элемента
       const parentIndex = newItems.findIndex(
