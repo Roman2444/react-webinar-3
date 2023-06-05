@@ -18,8 +18,8 @@ function LoginFormControl() {
   }));
 
   const [fields, setFields] = useState({
-    login: "test_1",
-    password: "123456",
+    login: "",
+    password: "",
   });
 
   const callbacks = {
@@ -47,7 +47,6 @@ function LoginFormControl() {
    }, []);
 
   return (
-    //<PageLayout>
     <LoginForm
       onChangeLogin={callbacks.onChangeLogin}
       onChangePassword={callbacks.onChangePassword}
@@ -55,7 +54,6 @@ function LoginFormControl() {
       errorMessage={select.errorMessage}
       t={t}
     />
-    // </PageLayout>
   );
 }
 
