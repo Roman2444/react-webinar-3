@@ -40,7 +40,9 @@ function Profile() {
         <LocaleSelect />
       </Head>
       <Navigation />
-      {select.waiting ? <Spinner /> : <ProfileLayout user={select.user} />}
+      <Spinner active={select.waiting}>
+        <ProfileLayout user={select.user} />
+      </Spinner>
     </PageLayout>
   );
 }
