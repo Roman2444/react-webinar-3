@@ -4,7 +4,7 @@ import {cn as bem} from '@bem-react/classname';
 import Input from "../../components/input";
 import './style.css';
 
-function LoginForm({handleFetchLogin, onChangeLogin, onChangePassword, errorMessage}) {
+function LoginForm({handleFetchLogin, onChangeLogin, onChangePassword, errorMessage, t}) {
 
   const cn = bem('LoginForm');
 
@@ -19,22 +19,22 @@ function LoginForm({handleFetchLogin, onChangeLogin, onChangePassword, errorMess
 
   return (
     <form onSubmit={handleSubmit} className={cn()}>
-      <h2 className={cn('title')}>Вход</h2>
+      <h2 className={cn('title')}>{t('auth.title')}</h2>
         <div className={cn('container')}>
           <div className={cn('item')}>
-            <label className={cn('label')}>Логин</label>
+            <label className={cn('label')}>{t('auth.label.login')}</label>
             <Input type="text" onChange={onChangeLogin} value=""/>
           </div>
 
           <div className={cn('item')}>
-            <label className={cn('label')}>Пароль</label>
+            <label className={cn('label')}>{t('auth.label.password')}</label>
             <Input type="password" onChange={onChangePassword} value=""/>
           </div>
         </div>
         {
           errorMessage ? <span className={cn('error')}>{errorMessage}</span> : null
         }
-        <input className={cn('btn')} type="submit" value="Войти"/>
+        <input className={cn('btn')} type="submit" value={t('auth.submit')}/>
     </form>
   );
 }

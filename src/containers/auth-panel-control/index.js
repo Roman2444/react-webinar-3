@@ -36,7 +36,7 @@ function AuthPanelControl() {
           t={t}
         /> 
         :
-        <button onClick={callbacks.onNavigateLogin}>войти</button>
+        <button onClick={callbacks.onNavigateLogin}>{t('auth.login')}</button>
       }
     </>
   )

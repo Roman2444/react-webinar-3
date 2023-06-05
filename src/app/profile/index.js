@@ -41,7 +41,7 @@ function Profile() {
       </Head>
       <Navigation />
       <Spinner active={select.waiting}>
-        <ProfileLayout user={select.user} />
+        <ProfileLayout user={select.user} t={t} />
       </Spinner>
     </PageLayout>
   );
