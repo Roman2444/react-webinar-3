@@ -8,7 +8,7 @@ class AuthenticationState extends StoreModule {
     return {
       user: '',
       token: localStorage.getItem('token'),
-      waiting: true,
+      waiting: false,
       isAuth: false,
       errorMessage: "",
     };
