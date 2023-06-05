@@ -6,9 +6,9 @@ import StoreModule from "../module";
 class AuthenticationState extends StoreModule {
   initState() {
     return {
-      user: {},
+      user: '',
       token: localStorage.getItem('token'),
-      waiting: false,
+      waiting: true,
       isAuth: false,
       errorMessage: "",
     };
@@ -38,7 +38,7 @@ class AuthenticationState extends StoreModule {
         localStorage.setItem("token", data.result.token);
 
         this.setState({
-          user: data.result.user,
+          user: data.result.user.profile.name,
           token: data.result.token,
           errorMessage: "",
           waiting: false,
@@ -84,7 +84,7 @@ class AuthenticationState extends StoreModule {
 
       localStorage.removeItem('token');
       this.setState({
-        user: {},
+        user: "",
         token: "",
         errorMessage: "",
         waiting: false,
@@ -125,7 +125,7 @@ class AuthenticationState extends StoreModule {
 
       this.setState({
         ...this.getState(),
-        user: data.result.profile,
+        user: data.result.profile.name,
         errorMessage: "",
         waiting: false,
         isAuth: true

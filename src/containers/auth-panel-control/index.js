@@ -15,7 +15,7 @@ function AuthPanelControl() {
   const {t} = useTranslate();
 
   const select = useSelector(state => ({
-    user: state.authentication.user?.profile?.name,
+    user: state.authentication.user,
     isAuth: state.authentication.isAuth
   }))
 
