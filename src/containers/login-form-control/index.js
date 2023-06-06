@@ -25,13 +25,13 @@ function LoginFormControl() {
   const callbacks = {
     onChangeLogin: useCallback(
       (value) => {
-        setFields({ ...fields, login: value });
+        setFields(prevState => ({ ...prevState, login: value }));
       },
       [fields]
     ),
     onChangePassword: useCallback(
       (value) => {
-        setFields({ ...fields, password: value });
+        setFields(prevState =>({ ...prevState, password: value }));
       },
       [fields]
     ),
@@ -52,6 +52,8 @@ function LoginFormControl() {
       onChangePassword={callbacks.onChangePassword}
       handleFetchLogin={callbacks.handleFetchLogin}
       errorMessage={select.errorMessage}
+      loginValue={fields.login}
+      passwordValue={fields.password}
       t={t}
     />
   );

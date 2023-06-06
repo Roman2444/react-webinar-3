@@ -4,13 +4,9 @@ import {cn as bem} from '@bem-react/classname';
 import Input from "../../components/input";
 import './style.css';
 
-function LoginForm({handleFetchLogin, onChangeLogin, onChangePassword, errorMessage, t}) {
+function LoginForm({handleFetchLogin, onChangeLogin, onChangePassword, errorMessage, t, loginValue, passwordValue}) {
 
   const cn = bem('LoginForm');
-
-  // const callbacks = {
-  //   onAdd: (e) => props.onAdd(props.item._id),
-  // }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,12 +19,12 @@ function LoginForm({handleFetchLogin, onChangeLogin, onChangePassword, errorMess
         <div className={cn('container')}>
           <div className={cn('item')}>
             <label className={cn('label')}>{t('auth.label.login')}</label>
-            <Input type="text" onChange={onChangeLogin} value=""/>
+            <input className={cn('input')} type="text" onChange={e => onChangeLogin(e.target.value)} value={loginValue}/>
           </div>
 
           <div className={cn('item')}>
             <label className={cn('label')}>{t('auth.label.password')}</label>
-            <Input type="password" onChange={onChangePassword} value=""/>
+            <input className={cn('input')} type="password" onChange={e => onChangePassword(e.target.value)} value={passwordValue}/>
           </div>
         </div>
         {
