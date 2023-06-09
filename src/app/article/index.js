@@ -17,6 +17,8 @@ import articleActions from "../../store-redux/article/actions";
 import commentsArticle from "../../store-redux/article-comments/actions";
 import treeToList from "../../utils/tree-to-list";
 import listToTree from "../../utils/list-to-tree";
+import Comments from '../../containers/comments';
+
 
 function Article() {
   const store = useStore();
@@ -26,14 +28,11 @@ function Article() {
   useInit(() => {
     //store.actions.article.load(params.id);
     dispatch(articleActions.load(params.id));
-    dispatch(commentsArticle.load(params.id));
   }, [params.id]);
   const select = useSelectorRedux(
     (state) => ({
       article: state.article.data,
       waiting: state.article.waiting,
-      comments: state.articleComments.data,
-      countComment: state.articleComments.count
     }),
     shallowequal
   ); // Нужно указать функцию для сравнения свойства объекта, так как хуком вернули объект
@@ -45,32 +44,6 @@ function Article() {
       [store]
     ),
   };
- 
-
-  const options = {
-    comments: useMemo(() => [
-      ...treeToList(
-        listToTree(select.comments, "_id", "article"),
-        (item, level) => ({
-          id: item._id,
-          name: item.author.profile.name,
-          text: item.text, 
-          dateCreate: item.dateCreate, 
-          level
-        })
-      )
-    ], [select.comments]),
-  }
-
-  console.log(select.comments)
-
-  console.log('options',options.comments);
-  const [value, setValue] = useState([])
-
-  const handlePostComment = (id) => {
-    dispatch(commentsArticle.postComment(params.id, 'article', 'снова комментарий к товару'));
-    console.log(value)
-  }
 
   return (
     <PageLayout>
@@ -86,17 +59,7 @@ function Article() {
           t={t}
         />
       </Spinner>
-      <h2>Комментарии({select.countComment})</h2>
-      {options.comments.map((el) => (
-        <div style={{ border: "1px solid gray", padding: 10 }} key={el.id}>
-          <h3>
-            {el.name} - {el.dateCreate}
-          </h3>
-          <p>{el.text}</p>
-          <input value={value} onChange={(e) => setValue(e.target.value) }/>
-          <button onClick={()=> handlePostComment(el.id)} >Ответить</button>
-        </div>
-      ))}
+      <Comments id={params.id} />
     </PageLayout>
   );
 }
