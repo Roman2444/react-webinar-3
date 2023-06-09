@@ -23,4 +23,33 @@ export default {
       }
     }
   },
+
+  postComment: (id, type, text) => {
+    return async(dispatch, getState, services) => {
+      dispatch({type: "article-comments/post-start",})
+
+      try {
+        const res = await services.api.request({
+          url: `/api/v1/comments?fields=*,author(profile(name))`,
+          method: 'POST',
+          body: JSON.stringify({
+            text: text,
+            parent: {
+              _id: id,
+              _type: type
+            }
+          })
+        });
+        console.log(res.result._id)
+
+        dispatch({type: "article-comments/post-complited", payload: {data: res.result}});
+
+      } catch (e){
+        dispatch({type: "article-comments/post-error"});
+      }
+    }
+  },
+
+
+
 }
