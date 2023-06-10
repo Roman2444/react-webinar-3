@@ -4,18 +4,15 @@ import { cn as bem } from "@bem-react/classname";
 import dataFormat from "../../utils/date-format";
 import "./style.css";
 
-function CommentItem({ id, name, dateCreate, text, level, setCommentFormVisible, sentComment }) {
+function CommentItem({ id, name, dateCreate, text, level, setCommentAnserVisible, sentComment, isFormVisible }) {
   const [textValue, setTextValue] = useState("");
-  const [isFormVisible, setisFormVisible] = useState(false);
 
-  const onHandleSentComment = () => {
-    setCommentFormVisible(false)
-    setisFormVisible(true)
+  const onHandleSentComment = (id) => {
+    setCommentAnserVisible(id)
   }
 
   const onHandleCancel = () => {
-    setCommentFormVisible(false)
-    setCommentFormVisible(true)
+    setCommentAnserVisible(false)
   }
 
   const cn = bem("CommentItem");
@@ -29,7 +26,7 @@ function CommentItem({ id, name, dateCreate, text, level, setCommentFormVisible,
         <span className={cn("date")}>{dataFormat(dateCreate)}</span>
       </div>
       <p className={cn("text")}>{text}</p>
-      <button className={cn("btn")} onClick={() => onHandleSentComment()}>
+      <button className={cn("btn")} onClick={() => onHandleSentComment(id)}>
         Ответить
       </button>
       <div style={{ display: isFormVisible ? "flex" : "none" }} className={cn("form")}>
@@ -45,7 +42,7 @@ function CommentItem({ id, name, dateCreate, text, level, setCommentFormVisible,
           >
             Отправить
           </button>
-          <button onClick={() => setisFormVisible(onHandleCancel)}>Отмена</button>
+          <button onClick={onHandleCancel}>Отмена</button>
         </div>
       </div>
     </div>

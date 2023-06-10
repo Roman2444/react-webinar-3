@@ -52,7 +52,8 @@ function Comments(props) {
 
   console.log(select.comments);
   console.log("options", options.comments);
-  const [commentFormVisible, setCommentFormVisible] = useState(true);
+
+  const [commentAnserVisible, setCommentAnserVisible] = useState(false);
 
   const handlePostComment = (textValue, type = "article", id = props.id) => {
     dispatch(commentsArticle.postComment(id, type, textValue));
@@ -65,12 +66,13 @@ function Comments(props) {
           <CommentItem
             key={el.id}
             {...el}
-            setCommentFormVisible={setCommentFormVisible}
+            setCommentAnserVisible={setCommentAnserVisible}
+            isFormVisible={el.id === commentAnserVisible ? true : false}
             sentComment={handlePostComment}
           />
         ))}
         <CommentForm
-          isFormVisible={commentFormVisible}
+          isFormVisible={commentAnserVisible ? false : true}
           sentComment={handlePostComment}
         />
       </Spinner>
