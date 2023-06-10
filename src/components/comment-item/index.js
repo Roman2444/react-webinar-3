@@ -50,7 +50,6 @@ function CommentItem({
           <textarea
             className={cn("form-comment")}
             onChange={(e) => setTextValue(e.target.value)}
-            placeholder={`Мой ответ для  ${name}`}
           ></textarea>
           <div>
             <button

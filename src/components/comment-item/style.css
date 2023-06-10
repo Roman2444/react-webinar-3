@@ -61,6 +61,8 @@
   font-size: 14px;
   line-height: 16px;
   resize: none;
+
+  padding: 4px 5px;
 }
 .CommentItem-form-btn {
   margin-right: 10px;
@@ -70,6 +72,7 @@
   margin-top: 30px;
 }
 .CommentItem-propfileLink {
+
   font-family: 'Arial';
   font-style: normal;
   font-weight: 400;
@@ -79,11 +82,9 @@
   color: #0087E9;
 }
 
-
 .CommentItem-cancelAuth {
   color: #666666;
   padding:  0 0 0 5px;
   cursor: pointer;
   text-decoration-line: underline;
 }
-

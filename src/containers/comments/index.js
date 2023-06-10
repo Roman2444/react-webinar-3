@@ -79,6 +79,7 @@ function Comments(props) {
         <CommentForm
           isFormVisible={commentAnserVisible ? false : true}
           sentComment={handlePostComment}
+          isExists={selectState.exists}
         />
       </Spinner>
     </CommentLayout>
