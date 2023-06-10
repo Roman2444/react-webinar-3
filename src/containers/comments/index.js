@@ -28,6 +28,10 @@ function Comments(props) {
     shallowequal
   ); // Нужно указать функцию для сравнения свойства объекта, так как хуком вернули объект
 
+  const selectState = useSelector(state => ({
+    exists: state.session.exists
+  }));
+
   useInit(() => {
     dispatch(commentsArticle.load(props.id));
   }, [props.id, select.countComment]);
@@ -69,6 +73,7 @@ function Comments(props) {
             setCommentAnserVisible={setCommentAnserVisible}
             isFormVisible={el.id === commentAnserVisible ? true : false}
             sentComment={handlePostComment}
+            isExists={selectState.exists}
           />
         ))}
         <CommentForm

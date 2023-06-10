@@ -2,18 +2,30 @@ import { memo, useState } from "react";
 import PropTypes from "prop-types";
 import { cn as bem } from "@bem-react/classname";
 import dataFormat from "../../utils/date-format";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+
 import "./style.css";
 
-function CommentItem({ id, name, dateCreate, text, level, setCommentAnserVisible, sentComment, isFormVisible }) {
+function CommentItem({
+  id,
+  name,
+  dateCreate,
+  text,
+  level,
+  setCommentAnserVisible,
+  sentComment,
+  isFormVisible,
+  isExists,
+}) {
   const [textValue, setTextValue] = useState("");
 
   const onHandleSentComment = (id) => {
-    setCommentAnserVisible(id)
-  }
+    setCommentAnserVisible(id);
+  };
 
   const onHandleCancel = () => {
-    setCommentAnserVisible(false)
-  }
+    setCommentAnserVisible(false);
+  };
 
   const cn = bem("CommentItem");
   return (
@@ -29,22 +41,38 @@ function CommentItem({ id, name, dateCreate, text, level, setCommentAnserVisible
       <button className={cn("btn")} onClick={() => onHandleSentComment(id)}>
         Ответить
       </button>
-      <div style={{ display: isFormVisible ? "flex" : "none" }} className={cn("form")}>
-        <span className={cn("form-title")}>{"Новый ответ"}</span>
-        <textarea
-          className={cn("form-comment")}
-          onChange={(e) => setTextValue(e.target.value)}
-        ></textarea>
-        <div>
-          <button
-            className={cn("form-btn")}
-            onClick={() => sentComment(textValue, 'comment', id)}
-          >
-            Отправить
-          </button>
-          <button onClick={onHandleCancel}>Отмена</button>
+      {isExists ? (
+        <div
+          style={{ display: isFormVisible ? "flex" : "none" }}
+          className={cn("form")}
+        >
+          <span className={cn("form-title")}>{"Новый ответ"}</span>
+          <textarea
+            className={cn("form-comment")}
+            onChange={(e) => setTextValue(e.target.value)}
+          ></textarea>
+          <div>
+            <button
+              className={cn("form-btn")}
+              onClick={() => sentComment(textValue, "comment", id)}
+            >
+              Отправить
+            </button>
+            <button onClick={onHandleCancel}>Отмена</button>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div
+          className={cn("checkAuth")}
+          style={{ display: isFormVisible ? "flex" : "none" }}
+        >
+          <Link to="/profile" className={cn("propfileLink")}>
+            Войдите
+          </Link>
+          , чтобы иметь возможность ответить.
+          <button className={cn("cancelAuth")} onClick={onHandleCancel}>Отмена</button>
+        </div>
+      )}
     </div>
   );
 }
