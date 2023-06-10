@@ -8,6 +8,14 @@
   font-weight: 700;
   font-size: 12px;
 }
+
+.CommentItem-title-current {
+  color: #666666;
+  font-family: 'Arial';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+}
  
 .CommentItem-date {
   margin-left: 10px;
@@ -71,14 +79,13 @@
 .CommentItem-checkAuth {
   margin-top: 30px;
 }
-.CommentItem-propfileLink {
-
+.CommentItem-signInLink {
   font-family: 'Arial';
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   text-decoration-line: underline;
-
+  cursor: pointer;
   color: #0087E9;
 }
 

@@ -1,7 +1,7 @@
-import { memo, useState } from "react";
+import { memo, useState, useCallback } from "react";
 import PropTypes from "prop-types";
 import { cn as bem } from "@bem-react/classname";
-import dataFormat from "../../utils/date-format";
+import dateFormat from "../../utils/date-format";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import "./style.css";
@@ -16,15 +16,30 @@ function CommentItem({
   sentComment,
   isFormVisible,
   isExists,
+  currentUser,
 }) {
   const [textValue, setTextValue] = useState("");
 
-  const onHandleSentComment = (id) => {
-    setCommentAnserVisible(id);
-  };
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const onHandleCancel = () => {
-    setCommentAnserVisible(false);
+  const callbacks = {
+    // Переход к авторизации
+    onSignIn: useCallback(() => {
+      navigate("/login", { state: { back: location.pathname } });
+    }, [location.pathname]),
+    onOpenCommentArea: useCallback(() => {
+      setCommentAnserVisible(id);
+    }, [id, setCommentAnserVisible]),
+
+    onHandleCancel: useCallback(() => {
+      setCommentAnserVisible(false);
+    }, [setCommentAnserVisible]),
+
+    handleSendComment: useCallback(() => {
+      sentComment(textValue, "comment", id);
+      setCommentAnserVisible(false);
+    }, [textValue, sentComment, id]),
   };
 
   const cn = bem("CommentItem");
@@ -34,11 +49,15 @@ function CommentItem({
       style={{ marginLeft: `${(level < 15 ? level : 15) * 30}px` }}
     >
       <div className={cn("info")}>
-        <span className={cn("title")}>{name}</span>
-        <span className={cn("date")}>{dataFormat(dateCreate)}</span>
+        <span
+          className={currentUser === name ? cn("title-current") : cn("title")}
+        >
+          {name}
+        </span>
+        <span className={cn("date")}>{dateFormat(dateCreate)}</span>
       </div>
       <p className={cn("text")}>{text}</p>
-      <button className={cn("btn")} onClick={() => onHandleSentComment(id)}>
+      <button className={cn("btn")} onClick={callbacks.onOpenCommentArea}>
         Ответить
       </button>
       {isExists ? (
@@ -52,13 +71,10 @@ function CommentItem({
             onChange={(e) => setTextValue(e.target.value)}
           ></textarea>
           <div>
-            <button
-              className={cn("form-btn")}
-              onClick={() => sentComment(textValue, "comment", id)}
-            >
+            <button className={cn("form-btn")} onClick={callbacks.handleSendComment}>
               Отправить
             </button>
-            <button onClick={onHandleCancel}>Отмена</button>
+            <button onClick={callbacks.onHandleCancel}>Отмена</button>
           </div>
         </div>
       ) : (
@@ -66,23 +82,40 @@ function CommentItem({
           className={cn("checkAuth")}
           style={{ display: isFormVisible ? "flex" : "none" }}
         >
-          <Link to="/profile" className={cn("propfileLink")}>
+          <span
+            onClick={callbacks.onSignIn}
+            className={cn("signInLink")}
+            role="button"
+            tabIndex="0"
+          >
             Войдите
-          </Link>
+          </span>
           , чтобы иметь возможность ответить.
-          <span className={cn("cancelAuth")} onClick={onHandleCancel}>Отмена</span>
+          <span
+            className={cn("cancelAuth")}
+            role="button"
+            tabIndex="0"
+            onClick={callbacks.onHandleCancel}
+          >
+            Отмена
+          </span>
         </div>
       )}
     </div>
   );
 }
 
-// Field.propTypes = {
-//   label: PropTypes.node,
-//   error: PropTypes.node,
-//   children: PropTypes.node,
-// }
-
-// Field.defaultProps = {}
+CommentItem.propTypes = {
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  dateCreate: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+  level: PropTypes.number.isRequired,
+  setCommentAnserVisible: PropTypes.func.isRequired,
+  sentComment: PropTypes.func.isRequired,
+  isFormVisible: PropTypes.bool.isRequired,
+  isExists: PropTypes.bool.isRequired,
+  currentUser: PropTypes.string,
+};
 
 export default memo(CommentItem);

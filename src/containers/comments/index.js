@@ -28,8 +28,9 @@ function Comments(props) {
     shallowequal
   ); // Нужно указать функцию для сравнения свойства объекта, так как хуком вернули объект
 
-  const selectState = useSelector(state => ({
-    exists: state.session.exists
+  const selectState = useSelector((state) => ({
+    exists: state.session.exists,
+    userName: state.session.user.profile?.name,
   }));
 
   useInit(() => {
@@ -59,8 +60,13 @@ function Comments(props) {
 
   const [commentAnserVisible, setCommentAnserVisible] = useState(false);
 
-  const handlePostComment = (textValue, type = "article", id = props.id) => {
-    dispatch(commentsArticle.postComment(id, type, textValue));
+  const callbacks = {
+    handlePostComment: useCallback(
+      (textValue, type = "article", id = props.id) => {
+        dispatch(commentsArticle.postComment(id, type, textValue));
+      },
+      [dispatch, props.id]
+    ),
   };
 
   return (
@@ -72,13 +78,14 @@ function Comments(props) {
             {...el}
             setCommentAnserVisible={setCommentAnserVisible}
             isFormVisible={el.id === commentAnserVisible ? true : false}
-            sentComment={handlePostComment}
+            sentComment={callbacks.handlePostComment}
             isExists={selectState.exists}
+            currentUser={selectState.userName}
           />
         ))}
         <CommentForm
-          isFormVisible={commentAnserVisible ? false : true}
-          sentComment={handlePostComment}
+          isFormVisible={!commentAnserVisible}
+          sentComment={callbacks.handlePostComment}
           isExists={selectState.exists}
         />
       </Spinner>
