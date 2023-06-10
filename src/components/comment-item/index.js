@@ -50,6 +50,7 @@ function CommentItem({
           <textarea
             className={cn("form-comment")}
             onChange={(e) => setTextValue(e.target.value)}
+            placeholder={`Мой ответ для  ${name}`}
           ></textarea>
           <div>
             <button
@@ -70,7 +71,7 @@ function CommentItem({
             Войдите
           </Link>
           , чтобы иметь возможность ответить.
-          <button className={cn("cancelAuth")} onClick={onHandleCancel}>Отмена</button>
+          <span className={cn("cancelAuth")} onClick={onHandleCancel}>Отмена</span>
         </div>
       )}
     </div>
