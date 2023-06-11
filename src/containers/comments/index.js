@@ -73,13 +73,27 @@ function Comments(props) {
     
   const [commentAnserVisible, setCommentAnserVisible] = useState(false);
   const findIdToPlaceComment = (id) => {
-    const findLevel = options.comments.find(el => el.id === id).level
+    let findLevel = options.comments.find(el => el.id === id).level
+    // if (findLevel === 0) {
+    //   setCommentAnserVisible(id);
+    //   return;
+    // }
     const findIndex = options.comments.findIndex(el => el.id === id)
-    const findComment = options.comments.find((el, index) => {
-      return el.level === findLevel && index > findIndex
-    })
+console.log('findIndex', findIndex);
 
-    setCommentAnserVisible(findComment?.id)
+    if (options.comments[findIndex + 1].level >  findLevel) {
+      const findComment = options.comments.filter((el, index) => {
+        
+         return el.level === ++findLevel
+       })
+       console.log('findComment', findComment);
+       setCommentAnserVisible(!findComment ? id : findComment.id);
+
+    } else {
+      setCommentAnserVisible(id);
+    }
+
+
 
 
   //  return findComment.id
