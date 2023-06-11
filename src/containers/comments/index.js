@@ -58,8 +58,7 @@ function Comments(props) {
   console.log(select.comments);
   console.log("options", options.comments);
 
-  const [commentAnserVisible, setCommentAnserVisible] = useState(false);
-
+  
   const callbacks = {
     handlePostComment: useCallback(
       (textValue, type = "article", id = props.id) => {
@@ -69,10 +68,23 @@ function Comments(props) {
         dispatch(commentsArticle.postComment(id, type, textValue));
       },
       [dispatch, props.id]
-    ),
-  };
+      ),
+    };
+    
+  const [commentAnserVisible, setCommentAnserVisible] = useState(false);
+  const findIdToPlaceComment = (id) => {
+    const findLevel = options.comments.find(el => el.id === id).level
+    const findIndex = options.comments.findIndex(el => el.id === id)
+    const findComment = options.comments.find((el, index) => {
+      return el.level === findLevel && index > findIndex
+    })
 
-  console.log("waiting", select.waiting);
+    setCommentAnserVisible(findComment?.id)
+
+
+  //  return findComment.id
+
+  }
 
   return (
     <CommentLayout countComment={select.countComment}>
@@ -81,6 +93,7 @@ function Comments(props) {
           <CommentItem
             key={el.id}
             {...el}
+            findIdToPlaceComment={findIdToPlaceComment}
             setCommentAnserVisible={setCommentAnserVisible}
             isFormVisible={el.id === commentAnserVisible ? true : false}
             sentComment={callbacks.handlePostComment}

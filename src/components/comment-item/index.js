@@ -13,6 +13,7 @@ function CommentItem({
   text,
   level,
   setCommentAnserVisible,
+  findIdToPlaceComment,
   sentComment,
   isFormVisible,
   isExists,
@@ -29,7 +30,7 @@ function CommentItem({
       navigate("/login", { state: { back: location.pathname } });
     }, [location.pathname]),
     onOpenCommentArea: useCallback(() => {
-      setCommentAnserVisible(id);
+      findIdToPlaceComment(id);
     }, [id, setCommentAnserVisible]),
 
     onHandleCancel: useCallback(() => {
@@ -39,6 +40,7 @@ function CommentItem({
     handleSendComment: useCallback(() => {
       sentComment(textValue, "comment", id);
       setCommentAnserVisible(false);
+      setTextValue("");
     }, [textValue, sentComment, id]),
   };
 
