@@ -35,7 +35,7 @@ function Comments(props) {
 
   useInit(() => {
     dispatch(commentsArticle.load(props.id));
-  }, [props.id, select.countComment]);
+  }, [props.id]);
 
   const options = {
     comments: useMemo(
@@ -63,11 +63,16 @@ function Comments(props) {
   const callbacks = {
     handlePostComment: useCallback(
       (textValue, type = "article", id = props.id) => {
+        if (textValue.trim().length === 0) {
+          return;
+        }
         dispatch(commentsArticle.postComment(id, type, textValue));
       },
       [dispatch, props.id]
     ),
   };
+
+  console.log("waiting", select.waiting);
 
   return (
     <CommentLayout countComment={select.countComment}>
