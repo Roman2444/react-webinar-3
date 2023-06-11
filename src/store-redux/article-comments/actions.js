@@ -40,9 +40,8 @@ export default {
             }
           })
         });
-        console.log(res.result._id)
 
-        dispatch({type: "article-comments/post-complited", payload: {data: res.result}});
+        dispatch({type: "article-comments/post-complited", payload: {data: res.data.result}});
 
       } catch (e){
         dispatch({type: "article-comments/post-error"});
