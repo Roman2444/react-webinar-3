@@ -1,4 +1,4 @@
-import { memo, useState, useCallback } from "react";
+import { memo, useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import { cn as bem } from "@bem-react/classname";
 import dateFormat from "../../utils/date-format";
@@ -17,9 +17,12 @@ function CommentItem({
   isFormVisible,
   isExists,
   currentUser,
+  lastChild,
 }) {
   const [textValue, setTextValue] = useState("");
-
+  useEffect(() => {
+    setTextValue('');
+  }, []);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -29,7 +32,7 @@ function CommentItem({
       navigate("/login", { state: { back: location.pathname } });
     }, [location.pathname]),
     onOpenCommentArea: useCallback(() => {
-      setCommentAnserVisible(id);
+      setCommentAnserVisible(lastChild);
     }, [id, setCommentAnserVisible]),
 
     onHandleCancel: useCallback(() => {
@@ -63,7 +66,7 @@ function CommentItem({
       {isExists ? (
         <div
           style={{ display: isFormVisible ? "flex" : "none" }}
-          className={cn("form")}
+          className={lastChild === id ? cn("form--shift") : cn("form")}
         >
           <span className={cn("form-title")}>{"Новый ответ"}</span>
           <textarea

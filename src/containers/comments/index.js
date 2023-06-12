@@ -42,12 +42,13 @@ function Comments(props) {
       () => [
         ...treeToList(
           listToTree(select.comments, "_id", "article"),
-          (item, level) => ({
+          (item, level, lastChild) => ({
             id: item._id,
             name: item.author.profile.name,
             text: item.text,
             dateCreate: item.dateCreate,
             level,
+            lastChild: item.lastChild
           })
         ),
       ],
